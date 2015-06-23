@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopAroundModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ShopAroundEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Category" EntityType="ShopAroundModel.Category" />
+    <EntitySet Name="Order" EntityType="ShopAroundModel.Order" />
+    <EntitySet Name="OrderShopItem" EntityType="ShopAroundModel.OrderShopItem" />
+    <EntitySet Name="Role" EntityType="ShopAroundModel.Role" />
+    <EntitySet Name="ShopItem" EntityType="ShopAroundModel.ShopItem" />
+    <EntitySet Name="User" EntityType="ShopAroundModel.User" />
+    <AssociationSet Name="FK_ShopItem_Category" Association="ShopAroundModel.FK_ShopItem_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="ShopItem" EntitySet="ShopItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderShopItem_Order" Association="ShopAroundModel.FK_OrderShopItem_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderShopItem" EntitySet="OrderShopItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderShopItem_ShopItem" Association="ShopAroundModel.FK_OrderShopItem_ShopItem">
+      <End Role="ShopItem" EntitySet="ShopItem" />
+      <End Role="OrderShopItem" EntitySet="OrderShopItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="ShopAroundModel.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ShopItem" Relationship="ShopAroundModel.FK_ShopItem_Category" FromRole="Category" ToRole="ShopItem" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ShipAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Proceed" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="OrderShopItem" Relationship="ShopAroundModel.FK_OrderShopItem_Order" FromRole="Order" ToRole="OrderShopItem" />
+  </EntityType>
+  <EntityType Name="OrderShopItem">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ShopItemId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="ShopItemId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="ShopAroundModel.FK_OrderShopItem_Order" FromRole="OrderShopItem" ToRole="Order" />
+    <NavigationProperty Name="ShopItem" Relationship="ShopAroundModel.FK_OrderShopItem_ShopItem" FromRole="OrderShopItem" ToRole="ShopItem" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="ShopAroundModel.FK_User_Role" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ShopItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Available" Type="Boolean" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Category" Relationship="ShopAroundModel.FK_ShopItem_Category" FromRole="ShopItem" ToRole="Category" />
+    <NavigationProperty Name="OrderShopItem" Relationship="ShopAroundModel.FK_OrderShopItem_ShopItem" FromRole="ShopItem" ToRole="OrderShopItem" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="ShopAroundModel.FK_User_Role" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_ShopItem_Category">
+    <End Type="ShopAroundModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="ShopAroundModel.ShopItem" Role="ShopItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShopItem">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderShopItem_Order">
+    <End Type="ShopAroundModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="ShopAroundModel.OrderShopItem" Role="OrderShopItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderShopItem">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderShopItem_ShopItem">
+    <End Type="ShopAroundModel.ShopItem" Role="ShopItem" Multiplicity="1" />
+    <End Type="ShopAroundModel.OrderShopItem" Role="OrderShopItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShopItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderShopItem">
+        <PropertyRef Name="ShopItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Type="ShopAroundModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="ShopAroundModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

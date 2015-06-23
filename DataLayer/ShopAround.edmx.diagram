@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="65b84d64ec4b4ed191eb33cb350527c9" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopAroundModel.Category" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="ShopAroundModel.Order" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="ShopAroundModel.OrderShopItem" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="ShopAroundModel.Role" Width="1.5" PointX="5.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ShopAroundModel.ShopItem" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="ShopAroundModel.User" Width="1.5" PointX="8" PointY="4.875" />
+        <AssociationConnector Association="ShopAroundModel.FK_ShopItem_Category" />
+        <AssociationConnector Association="ShopAroundModel.FK_OrderShopItem_Order" />
+        <AssociationConnector Association="ShopAroundModel.FK_OrderShopItem_ShopItem" />
+        <AssociationConnector Association="ShopAroundModel.FK_User_Role" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

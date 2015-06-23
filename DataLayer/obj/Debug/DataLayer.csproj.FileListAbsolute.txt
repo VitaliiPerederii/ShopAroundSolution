@@ -3,3 +3,8 @@ D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\bin\Debug\DataLayer.pdb
 D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
 D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\obj\Debug\DataLayer.dll
 D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\obj\Debug\DataLayer.pdb
+D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\bin\Debug\ShopAround.mdf
+D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\bin\Debug\ShopAround_log.ldf
+D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\bin\Debug\DataLayer.dll.config
+D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\bin\Debug\EntityFramework.dll
+D:\Microsoft.net\Solution\ShopAroundSolution\DataLayer\bin\Debug\EntityFramework.xml
