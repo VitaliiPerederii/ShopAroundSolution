@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using ShopAround.Infrastructure;
+using System.IO;
 
 namespace ShopAround
 {
@@ -17,13 +18,19 @@ namespace ShopAround
     {
         protected void Application_Start()
         {
+            string root = Server.MapPath("~/");
+            string parent = Path.GetDirectoryName(root);
+            string grandParent = Path.GetDirectoryName(parent) + "\\DataLayer";
+
+            AppDomain.CurrentDomain.SetData("DataDirectory", grandParent);
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            //ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            DependencyResolver.SetResolver(new NinjectDependencyResolver());
         }
     }
 }

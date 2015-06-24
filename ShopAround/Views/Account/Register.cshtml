@@ -1,0 +1,32 @@
+﻿@model ShopAround.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <p>
+        @Html.NameFor(m => m.Email)
+        @Html.EditorFor(m => m.Email)
+    </p>
+
+    <p>
+        @Html.NameFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+    </p>
+    
+    <p>
+        @Html.NameFor(m => m.Password)
+        @Html.EditorFor(m => m.Password)
+    </p>
+
+    <p>
+        @Html.NameFor(m => m.PasswordConfirm)
+        @Html.EditorFor(m => m.PasswordConfirm)
+    </p>
+
+    <input type="submit" value="Register" />
+}

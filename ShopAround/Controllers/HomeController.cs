@@ -28,39 +28,35 @@ namespace ShopAround.Controllers
         [HttpGet]
         public ActionResult AddShopItem()
         {
-            //SelectList list = new SelectList(db.Category, "Id", "Name");
-            //ViewBag.Categories = list;
+            SelectList list = new SelectList(db.Categories, "Id", "Name");
+            ViewBag.Categories = list;
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddShopItem(/*ShopItem item,*/ HttpPostedFileBase file)
+        public ActionResult AddShopItem(UiShopItem item, HttpPostedFileBase file)
         {
 
-            //byte[] uploadedFile = new byte[file.InputStream.Length];
-            //file.InputStream.Read(uploadedFile, 0, (int)file.InputStream.Length);
+            byte[] uploadedFile = new byte[file.InputStream.Length];
+            file.InputStream.Read(uploadedFile, 0, (int)file.InputStream.Length);
 
-            //item.Image = uploadedFile;
-            //db.ShopItem.Add(item);
-            //db.SaveChanges();
+            item.Image = uploadedFile;
+            db.AddShopItem(item);
 
             return RedirectToAction("Index");
         }
 
         public ActionResult ShowItem(int id)
         {
-            db.ShopItems.Count();
-            UiShopItem shopItem = (from s in db.ShopItems where s.Id == id select new ModelCastUtils.ToUiShopItem(s)).FirstOrDefault();
+            UiShopItem shopItem = db.ShopItems.Where(s => s.Id == id).FirstOrDefault();
             ViewBag.CategoryName = shopItem.Category.Name;
-
             return View(shopItem);
         }
 
         public ActionResult ShowImage(int id)
         {
-            //ShopItem shopItem = db.ShopItem.Where(item => item.Id == id).FirstOrDefault();
-            //return File(shopItem.Image, "image/jpg");
-            return View();
+            UiShopItem shopItem = db.ShopItems.Where(s => s.Id == id).FirstOrDefault();
+            return File(shopItem.Image, "image/jpg");
         }
     }
 }

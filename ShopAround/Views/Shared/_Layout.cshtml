@@ -1,9 +1,10 @@
 ﻿@functions
 {
-    object ActiveActionLink(string linkText, string action)
+    object ActiveActionLink(string linkText, string action, string controllerName)
     {
-        bool Active = ViewContext.RouteData.Values["action"].ToString() == action;
-        return Html.ActionLink(linkText, action, null, Active ? new { @class = "active" } : null);
+        RouteValueDictionary dict = ViewContext.RouteData.Values;
+        bool Active = dict["action"].ToString() == action && dict["controller"].ToString() == controllerName;
+        return Html.ActionLink(linkText, action, controllerName, null, Active ? new { @class = "active" } : null);
     }
 }
 
@@ -39,19 +40,30 @@
             <div class="navigation">
                 <ul>
                     <li>
-                        @ActiveActionLink("Home", "Index")
+                        @ActiveActionLink("Home", "Index", "Home")
                     </li>
                     <li>
-                        @ActiveActionLink("Support", "/")
+                        @ActiveActionLink("Support", "/", "")
+                    </li>
+                    
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="login-li">
+                            @ActiveActionLink(User.Identity.Name, "LogOff", "Account")    
+                            @Html.Partial("_LoginPartial")
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            @ActiveActionLink("My Account", "Login", "Account")
+                        </li>
+                    }
+                    <li>
+                        @ActiveActionLink("The Store", "/", "")
                     </li>
                     <li>
-                        @ActiveActionLink("My Account", "/")
-                    </li>
-                    <li>
-                        @ActiveActionLink("The Store", "/")
-                    </li>
-                    <li>
-                        @ActiveActionLink("Contact", "/")
+                        @ActiveActionLink("Contact", "/", "")
                     </li>
                 </ul>
             </div>

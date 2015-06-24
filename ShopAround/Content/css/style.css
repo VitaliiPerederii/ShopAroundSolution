@@ -78,11 +78,19 @@
         display: block
     }
 
+    .navigation ul li.login-li a {
+        text-decoration: none;
+        color: white;
+        padding: 0px 10px 0px 10px;
+    }
+
     .navigation ul li a.active,
     .navigation ul li:hover a {
         background-color: white;
         color: #8b0000;
     }
+
+    
 
 .footer{
     background: #ebebeb;
@@ -139,3 +147,4 @@
 .container{
 
 }
+

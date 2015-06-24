@@ -1,0 +1,30 @@
+﻿@model ShopAround.Models.LogOnModel
+
+@{
+    ViewBag.Title = "MyAccount";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <p>
+        @Html.NameFor(m => m.Email)
+        @Html.EditorFor(m => m.Email)
+    </p>
+
+    <p>
+        @Html.NameFor(m => m.Password)
+        @Html.EditorFor(m => m.Password)
+    </p>
+
+    <p>
+        @Html.EditorFor(m => m.RememberMe)
+        @Html.NameFor(m => m.RememberMe)
+    </p>
+    
+    <input type="submit" value="LogIn"/>
+    @Html.ActionLink("Register", "Register") 
+}
+
+
