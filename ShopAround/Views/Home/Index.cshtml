@@ -24,6 +24,11 @@
                             @Html.ActionLink("Delete", "DeleteShopItem", new { id = @item.Id})
                         }
                     }
+                    @using(Html.BeginForm("AddItemToCart", "Cart", new { id = item.Id }, FormMethod.Post))
+                    {
+                        <input type="submit" value="Add to cart" />
+                    }
+                        
                 </li>
             }
         </ul>
