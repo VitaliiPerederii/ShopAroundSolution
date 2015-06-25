@@ -1,0 +1,45 @@
+﻿@model ShopAround.Models.UiShopItem
+
+@{
+    ViewBag.Title = "EditShopItem";
+}
+
+<h2>EditShopItem</h2>
+
+@using (Html.BeginForm("EditShopItem", "Home", null, FormMethod.Post,
+                              new { enctype = "multipart/form-data" }))
+{
+    @Html.EditorFor(m => m.Id)
+
+    <p>
+        @Html.NameFor(m => m.Name)
+        @Html.EditorFor(m => m.Name)
+    </p>
+
+    <p>
+        @Html.NameFor(m => m.CategoryId)
+        @Html.DropDownListFor(m => m.CategoryId, ViewBag.Categories as SelectList)
+    </p>
+
+    <p>
+        @Html.NameFor(m => m.Description)
+        @Html.EditorFor(m => m.Description)
+    </p>
+
+    <p>
+        @Html.NameFor(m => m.Price)
+        @Html.EditorFor(m => m.Price)
+    </p>
+
+    <p>
+        @Html.EditorFor(m => m.Available)
+        @Html.NameFor(m => m.Available)
+    </p>
+    
+    //<img src='@Url.Action("ShowImage", "Home", new { id = Model.Id })' />
+    <input type="Image"src='@Url.Action("ShowImage", "Home", new { id = Model.Id })' />
+    
+    <label for="file">Change Image:</label>
+    <input type="file" name="file" id="file" style="width: 100%;" />
+    <input type="submit" value="submit" />
+}

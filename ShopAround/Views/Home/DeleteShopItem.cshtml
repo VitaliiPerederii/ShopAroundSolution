@@ -1,0 +1,12 @@
+﻿@model ShopAround.Models.UiShopItem
+
+@{
+    ViewBag.Title = "DeleteShopItem";
+}
+
+<h2>DeleteShopItem</h2>
+@Html.Partial("_ShowPartial")
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}

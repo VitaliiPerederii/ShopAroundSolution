@@ -1,0 +1,24 @@
+﻿@model ShopAround.Models.UiShopItem
+
+@{
+    ViewBag.Title = "_ShowPartial";
+}
+
+<p>@Html.NameFor(m => m.Id)</p>
+<p>@Html.DisplayFor(m => m.Id)</p>
+
+<p>@Html.NameFor(m => m.Name)</p>
+<p>@Html.DisplayFor(m => m.Name)</p>
+<p>Category Name</p>
+<p>@ViewBag.CategoryName</p>
+
+<p>@Html.NameFor(m => m.Description)</p>
+<p>@Html.DisplayFor(m => m.Description)</p>
+
+<p>@Html.NameFor(m => m.Price)</p>
+<p>@Html.DisplayFor(m => m.Price)</p>
+
+<p>@Html.NameFor(m => m.Available)</p>
+<p>@Html.DisplayFor(m => m.Available)</p>
+
+<img src='@Url.Action("ShowImage", "Home", new { id = Model.Id })' />

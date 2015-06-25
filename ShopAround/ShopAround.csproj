@@ -135,8 +135,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Concrete\CustomMembershipProvider.cs" />
+    <Compile Include="Concrete\CustomRoleProvider.cs" />
     <Compile Include="Concrete\DatabaseProductStorage.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -144,6 +146,7 @@
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\UiCategory.cs" />
     <Compile Include="Models\UiRole.cs" />
     <Compile Include="Models\UiShopItem.cs" />
@@ -263,6 +266,10 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\ViewProfile.cshtml" />
+    <Content Include="Views\Home\EditShopItem.cshtml" />
+    <Content Include="Views\Home\DeleteShopItem.cshtml" />
+    <Content Include="Views\Shared\_ShowPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

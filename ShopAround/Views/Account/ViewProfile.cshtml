@@ -1,0 +1,32 @@
+﻿@model ShopAround.Models.UiUser
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Profile</h2>
+
+<p>
+    <strong>@Html.NameFor(m => m.Name):</strong>
+    @Html.DisplayFor(m => m.Name)
+</p>
+
+<p>
+    <strong>@Html.NameFor(m => m.Email):</strong>
+    @Html.DisplayFor(m => m.Email)
+</p>
+
+<p>
+    <strong>Role:</strong> 
+    @ViewBag.RoleName
+</p>
+
+@if (Request.IsAuthenticated)
+{
+    if (HttpContext.Current.User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Add new item", "AddShopItem", "Home")
+        </p>
+    }
+}

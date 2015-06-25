@@ -79,6 +79,8 @@
     }
 
     .navigation ul li.login-li a {
+        height: auto;
+        line-height: 32px;
         text-decoration: none;
         color: white;
         padding: 0px 10px 0px 10px;

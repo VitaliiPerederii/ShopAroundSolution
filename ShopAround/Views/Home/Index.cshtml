@@ -1,19 +1,36 @@
-﻿<!-- Main -->
+﻿@model IQueryable<ShopAround.Models.UiShopItem>
 <div id="main">
     <div class="sidepanel">
         <div class="container searchpanel">
 
         </div>
         <div class="container categories">
-
         </div>
     </div>
     <div class="content">
-        Content
+        <ul>
+            @foreach (ShopAround.Models.UiShopItem item in Model)
+            {
+                <li>
+                    @item.Name &nbsp @item.Category.Name &nbsp @item.Price 
+                    @Html.ActionLink("Details", "ShowItem", new { id = @item.Id})
+                    <span>&nbsp;</span>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (HttpContext.Current.User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Edit", "EditShopItem", new { id = @item.Id})
+                            <span>&nbsp;</span>       
+                            @Html.ActionLink("Delete", "DeleteShopItem", new { id = @item.Id})
+                        }
+                    }
+                </li>
+            }
+        </ul>
     </div>
 
 </div>
-<!-- End Side Full -->
+
 
 
 

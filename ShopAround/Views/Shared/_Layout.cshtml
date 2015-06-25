@@ -49,7 +49,7 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li class="login-li">
-                            @ActiveActionLink(User.Identity.Name, "LogOff", "Account")    
+                            @ActiveActionLink(User.Identity.Name, "ViewProfile", "Account")    
                             @Html.Partial("_LoginPartial")
                         </li>
                     }

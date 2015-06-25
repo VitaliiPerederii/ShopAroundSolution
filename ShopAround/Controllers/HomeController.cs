@@ -22,9 +22,11 @@ namespace ShopAround.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Shop Around";
-            return View();
+            return View(db.ShopItems);
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult AddShopItem()
         {
@@ -34,6 +36,7 @@ namespace ShopAround.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles="Admin")]
         public ActionResult AddShopItem(UiShopItem item, HttpPostedFileBase file)
         {
 
@@ -43,6 +46,52 @@ namespace ShopAround.Controllers
             item.Image = uploadedFile;
             db.AddShopItem(item);
 
+            return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public ActionResult EditShopItem(int id)
+        {
+            UiShopItem shopItem = db.ShopItems.Where(s => s.Id == id).FirstOrDefault();
+            SelectList list = new SelectList(db.Categories, "Id", "Name");
+            ViewBag.Categories = list;
+            return View(shopItem);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult EditShopItem(UiShopItem item, HttpPostedFileBase file)
+        {
+            byte[] uploadedFile = null;
+            if (file != null)
+            {
+                uploadedFile = new byte[file.InputStream.Length];
+                file.InputStream.Read(uploadedFile, 0, (int)file.InputStream.Length);
+                item.Image = uploadedFile;
+            }
+            else
+                item.Image = db.ShopItems.Where(i => i.Id == item.Id).FirstOrDefault().Image;
+                        
+            db.UpdateShopItem(item);
+
+            return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public ActionResult DeleteShopItem(int id)
+        {
+            UiShopItem shopItem = db.ShopItems.Where(s => s.Id == id).FirstOrDefault();
+            ViewBag.CategoryName = shopItem.Category.Name;
+            return View(shopItem);
+        }
+
+        [HttpPost, ActionName("DeleteShopItem")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteShopItemConfirm(int id)
+        {
+            db.DeleteShopItem(id);
             return RedirectToAction("Index");
         }
 
@@ -56,7 +105,10 @@ namespace ShopAround.Controllers
         public ActionResult ShowImage(int id)
         {
             UiShopItem shopItem = db.ShopItems.Where(s => s.Id == id).FirstOrDefault();
-            return File(shopItem.Image, "image/jpg");
+            if (shopItem.Image != null)
+                return File(shopItem.Image, "image/jpg");
+            else
+                return null;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using ShopAround.Models;
+using ShopAround.Abstract;
 using ShopAround.Concrete;
 using System.Web.Security;
 
@@ -11,6 +12,13 @@ namespace ShopAround.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
+
+        IProductStorage db;
+        public AccountController(IProductStorage storage)
+        {
+            db = storage;
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -69,6 +77,19 @@ namespace ShopAround.Controllers
                 }
             }
             return View(model);
+        }
+
+        public ActionResult ViewProfile()
+        {
+            UiUser uiUser = null;
+            MembershipUser user = Membership.GetUser();
+            if (user != null)
+            {
+                uiUser = db.FindUser(user.UserName);
+                ViewBag.RoleName = uiUser.Role.Name;
+            }
+
+            return View(uiUser);
         }
     }
 }
