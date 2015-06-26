@@ -99,5 +99,45 @@ namespace ShopAround.Utils
 
             return role;
         }
+
+        public static UiOrder ToUiOrder(Order order)
+        {
+            UiOrder uiOrder = new UiOrder();
+            uiOrder.Id = order.Id;
+            uiOrder.ShipAddress = order.ShipAddress;
+            uiOrder.Date = order.Date;
+            uiOrder.Proceed = order.Proceed;
+            uiOrder.CustomerName = order.CustomerName;
+            uiOrder.CustomerEmail = order.CustomerEmail;
+            uiOrder.Cart = null;
+
+            return uiOrder;
+        }
+
+        public static Order FromUiOrder(UiOrder uiOrder)
+        {
+            Order order = new Order();
+            order.Id = uiOrder.Id;
+            order.ShipAddress = uiOrder.ShipAddress;
+            order.Date = uiOrder.Date;
+            order.Proceed = uiOrder.Proceed;
+            order.CustomerName = uiOrder.CustomerName;
+            order.CustomerEmail = uiOrder.CustomerEmail;
+            if (uiOrder.Cart != null)
+            {
+                foreach(CartItem item in uiOrder.Cart.Items)
+                {
+                    order.OrderShopItem.Add(new OrderShopItem()
+                        {
+                            Quantity = item.Quantity,
+                            ShopItemId = item.ShopItem.Id,
+                            Order = order
+                        });
+                }
+            }
+
+            return order;
+        }
+
     }
 }

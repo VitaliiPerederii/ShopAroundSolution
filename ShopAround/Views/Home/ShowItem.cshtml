@@ -8,3 +8,8 @@
 
 
 @Html.Partial("_ShowPartial")
+
+@using (Html.BeginForm("AddItemToCart", "Cart", new { id = Model.Id }, FormMethod.Post))
+{
+    <input type="submit" value="Add to cart" />
+}

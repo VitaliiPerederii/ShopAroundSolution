@@ -22,7 +22,7 @@ namespace ShopAround.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Shop Around";
-            return View(db.ShopItems);
+            return View(db.ShopItems.ToList());
         }
 
 

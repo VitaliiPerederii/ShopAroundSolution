@@ -40,6 +40,8 @@
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ShipAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Proceed" Type="Boolean" Nullable="false" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="OrderShopItem" Relationship="ShopAroundModel.FK_OrderShopItem_Order" FromRole="Order" ToRole="OrderShopItem" />
   </EntityType>
   <EntityType Name="OrderShopItem">

@@ -1,0 +1,37 @@
+﻿@model ShopAround.Models.UiOrder
+
+@{
+    ViewBag.Title = "MakeOrder";
+}
+
+<h2>MakeOrder</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary();
+    @Html.HiddenFor(m => m.Id)
+    <p>
+        @Html.NameFor(m => m.CustomerName)
+        @Html.EditorFor(m => m.CustomerName)
+    </p>
+    
+    <p>
+        @Html.NameFor(m => m.CustomerEmail)
+        @Html.EditorFor(m => m.CustomerEmail)
+    </p>
+    
+    <p>
+        @Html.NameFor(m => m.ShipAddress)
+        @Html.EditorFor(m => m.ShipAddress)
+    </p>
+    
+    @Html.HiddenFor(m => m.Proceed)
+    @Html.HiddenFor(m => m.Date)
+    
+    
+    <p>
+        @Html.ActionLink("Back to cart", "Index")
+    </p>
+    
+    <input type="submit" value="Commit order"/>
+}

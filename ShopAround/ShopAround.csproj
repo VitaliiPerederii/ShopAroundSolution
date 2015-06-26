@@ -148,6 +148,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\UiCategory.cs" />
+    <Compile Include="Models\UiOrder.cs" />
     <Compile Include="Models\UiRole.cs" />
     <Compile Include="Models\UiShopItem.cs" />
     <Compile Include="Models\UiUser.cs" />
@@ -270,6 +271,8 @@
     <Content Include="Views\Home\EditShopItem.cshtml" />
     <Content Include="Views\Home\DeleteShopItem.cshtml" />
     <Content Include="Views\Shared\_ShowPartial.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\MakeOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

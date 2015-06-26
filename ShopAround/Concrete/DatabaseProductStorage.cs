@@ -70,5 +70,13 @@ namespace ShopAround.Concrete
             context.Role.Add(ModelCastUtils.FromUiRole(role));
             context.SaveChanges();
         }
+
+        public void CommitOrder(UiOrder uiOrder)
+        {
+            Order order = ModelCastUtils.FromUiOrder(uiOrder);
+            context.Order.Add(order);
+            context.SaveChanges();
+        }
+
     }
 }

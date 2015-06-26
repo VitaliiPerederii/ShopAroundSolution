@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="65b84d64ec4b4ed191eb33cb350527c9" Name="Diagram1">
         <EntityTypeShape EntityType="ShopAroundModel.Category" Width="1.5" PointX="0.75" PointY="1.5" />
-        <EntityTypeShape EntityType="ShopAroundModel.Order" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="ShopAroundModel.Order" Width="1.5" PointX="3" PointY="5.125" />
         <EntityTypeShape EntityType="ShopAroundModel.OrderShopItem" Width="1.5" PointX="5.25" PointY="1.375" />
         <EntityTypeShape EntityType="ShopAroundModel.Role" Width="1.5" PointX="5.75" PointY="5.25" />
         <EntityTypeShape EntityType="ShopAroundModel.ShopItem" Width="1.5" PointX="3" PointY="1" />
