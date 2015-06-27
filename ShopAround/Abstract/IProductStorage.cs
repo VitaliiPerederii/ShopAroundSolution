@@ -19,5 +19,7 @@ namespace ShopAround.Abstract
         UiUser FindUser(string name);
         void AddUser(UiUser user);
         void AddRole(UiRole role);
+
+        void CommitOrder(UiOrder order);
     }
 }

@@ -12,6 +12,8 @@
     <EntitySetMapping Name="Order">
       <EntityTypeMapping TypeName="ShopAroundModel.Order">
         <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
           <ScalarProperty Name="Proceed" ColumnName="Proceed" />
           <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
           <ScalarProperty Name="Date" ColumnName="Date" />

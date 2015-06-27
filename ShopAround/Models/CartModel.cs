@@ -9,24 +9,29 @@ namespace ShopAround.Models
     {
         private List<CartItem> items = new List<CartItem>();
 
-        public void AddItem(int id)
+        public void AddItem(UiShopItem item)
         {
-            CartItem existingItem = items.Find(m => m.ShopItemId == id);
+            CartItem existingItem = items.Find(m => m.ShopItem.Id == item.Id);
             if (existingItem != null)
                 existingItem.Quantity++;
             else
             {
                 items.Add(new CartItem()
                     {
-                        ShopItemId = id,
+                        ShopItem = item,
                         Quantity = 1
                     });
             }
         }
 
-        public void DeleteItem(int id)
+        public void DeleteItem(UiShopItem item)
         {
-            items.Remove(items.Find(m => m.ShopItemId == id));
+            items.Remove(items.Find(m => m.ShopItem.Id == item.Id));
+        }
+
+        public void Clear()
+        {
+            items.Clear();
         }
 
         public IEnumerable<CartItem> Items
@@ -36,11 +41,30 @@ namespace ShopAround.Models
                 return items;
             }
         }
+
+        public double Total
+        {
+            get
+            {
+                return items.Sum(i =>
+                    {
+                        return i.Amount;
+                    });
+            }
+        }
     }
 
     public class CartItem
     {
-        public int ShopItemId { get; set; }
+        public UiShopItem ShopItem { get; set; }
         public int Quantity { get; set; }
+
+        public double Amount
+        {
+            get
+            {
+                return ShopItem.Price * Quantity;
+            }
+        }
     }
 }

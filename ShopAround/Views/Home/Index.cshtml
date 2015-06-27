@@ -1,4 +1,13 @@
-﻿@model IQueryable<ShopAround.Models.UiShopItem>
+﻿@model List<ShopAround.Models.UiShopItem>
+
+@helper ShopItemPreview(ShopAround.Models.UiShopItem item)
+{
+    <li>
+        <div class="item-preview">
+            <img class="shop-item-img" src="@Url.Action("ShowImage", "Home", new { id = item.Id })" />
+        </div>
+    </li>
+}
 <div id="main">
     <div class="sidepanel">
         <div class="container searchpanel">
@@ -9,33 +18,31 @@
     </div>
     <div class="content">
         <ul>
-            @foreach (ShopAround.Models.UiShopItem item in Model)
+            @for (int index = 0; index < Math.Min(Model.Count(), 3); index++)
             {
-                <li>
-                    @item.Name &nbsp @item.Category.Name &nbsp @item.Price 
-                    @Html.ActionLink("Details", "ShowItem", new { id = @item.Id})
-                    <span>&nbsp;</span>
-                    @if (Request.IsAuthenticated)
-                    {
-                        if (HttpContext.Current.User.IsInRole("Admin"))
-                        {
-                            @Html.ActionLink("Edit", "EditShopItem", new { id = @item.Id})
-                            <span>&nbsp;</span>       
-                            @Html.ActionLink("Delete", "DeleteShopItem", new { id = @item.Id})
-                        }
-                    }
-                    @using(Html.BeginForm("AddItemToCart", "Cart", new { id = item.Id }, FormMethod.Post))
-                    {
-                        <input type="submit" value="Add to cart" />
-                    }
-                        
-                </li>
+                @ShopItemPreview(Model.ElementAt(index));
             }
+            
         </ul>
     </div>
-
 </div>
 
 
 
 
+@*@item.Name &nbsp @item.Category.Name &nbsp @item.Price
+    @Html.ActionLink("Details", "ShowItem", new { id = @item.Id })
+    <span>&nbsp;</span>
+    @if (Request.IsAuthenticated)
+    {
+        if (HttpContext.Current.User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "EditShopItem", new { id = @item.Id })
+            <span>&nbsp;</span>
+            @Html.ActionLink("Delete", "DeleteShopItem", new { id = @item.Id })
+        }
+    }
+    @using (Html.BeginForm("AddItemToCart", "Cart", new { id = item.Id }, FormMethod.Post))
+    {
+        <input type="submit" value="Add to cart" />
+    }*@

@@ -23,6 +23,8 @@ namespace DataLayer
         public System.DateTime Date { get; set; }
         public string ShipAddress { get; set; }
         public bool Proceed { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
     
         public virtual ICollection<OrderShopItem> OrderShopItem { get; set; }
     }

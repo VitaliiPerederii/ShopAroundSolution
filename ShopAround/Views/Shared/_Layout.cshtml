@@ -32,10 +32,10 @@
                 <a href="/">ShopAround</a>
             </h1>
             <div class="cart">
-                <a class="cart-link" href="/">Your shopping cart</a>
+                @Html.ActionLink("Your shopping cart", "Index", "Cart", null, new { @class = "cart-link" })
                 <br />
-                <span>Articles: <strong>4</strong></span>
-                <span>Cost: <strong>$250.99</strong></span>
+                <span>Articles: <strong>@Html.Action("GetCartItemsCount", "Cart")</strong></span>
+                <span>Cost: <strong>@Html.Action("GetCartItemsPrice", "Cart")</strong></span>
             </div>
             <div class="navigation">
                 <ul>

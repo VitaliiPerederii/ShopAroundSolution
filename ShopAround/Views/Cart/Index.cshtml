@@ -1,0 +1,47 @@
+﻿@model ShopAround.Models.Cart
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Items.Count() != 0)
+{
+    <table>
+    <tr>
+        <td>Item name</td>
+        <td>Item category</td>
+        <td>Item price</td>
+        <td>Item's count</td>
+        <td>Sub total</td>
+    </tr>
+    @foreach (ShopAround.Models.CartItem item in Model.Items)
+    {
+        <tr>
+            <td>@item.ShopItem.Name</td>
+            <td>@item.ShopItem.Category.Name</td>
+            <td>@item.ShopItem.Price</td>
+            <td>@item.Quantity</td>
+            <td>@item.Amount</td>
+            <td>
+                @using (Html.BeginForm("DeleteItemFromCart", "Cart", new { id = item.ShopItem.Id }, FormMethod.Post))
+                {
+                    <input type="submit" value="Delete" />
+                }
+            </td>
+        </tr>
+    }
+    </table>
+
+    <span>
+        <strong>Total:</strong>
+        @Model.Total
+    </span>
+    <p>
+        @Html.ActionLink("Make order", "MakeOrder")
+    </p>
+}
+else
+{
+    <p>
+        Your cart is empty, @Html.ActionLink("continue shopping.", "Index", "Home")
+    </p>
+}

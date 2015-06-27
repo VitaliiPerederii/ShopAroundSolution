@@ -9,7 +9,8 @@
 @using (Html.BeginForm("AddShopItem", "Home", null, FormMethod.Post, 
                               new { enctype = "multipart/form-data" }))
 {
-    @Html.EditorFor(m => m.Id)
+    
+    @Html.HiddenFor(m => m.Id)
 
     <p>
         @Html.NameFor(m => m.Name)

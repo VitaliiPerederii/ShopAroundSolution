@@ -20,6 +20,8 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="ShipAddress" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Proceed" Type="bit" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderShopItem">
           <Key>
@@ -175,6 +177,8 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ShipAddress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Proceed" Type="Boolean" Nullable="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderShopItem" Relationship="ShopAroundModel.FK_OrderShopItem_Order" FromRole="Order" ToRole="OrderShopItem" />
         </EntityType>
         <EntityType Name="OrderShopItem">
@@ -269,7 +273,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -286,6 +290,8 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="ShopAroundModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="Proceed" ColumnName="Proceed" />
                 <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
