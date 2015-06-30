@@ -4,7 +4,15 @@
 {
     <li>
         <div class="item-preview">
-            <img class="shop-item-img" src="@Url.Action("ShowImage", "Home", new { id = item.Id })" />
+            <a href="@Url.Action("ShowItem", "Home", new { id = item.Id })">
+                <img class="shop-item-img" src="@Url.Action("ShowImage", "Home", new { id = item.Id })" />
+            </a>
+            <div class="item-info">
+                <h3>@item.Category.Name</h3>
+                <div class="item-desc">
+                    <span></span>
+                </div>
+            </div>
         </div>
     </li>
 }
