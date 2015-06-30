@@ -140,6 +140,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,6 +148,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CartModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\UiCategory.cs" />
     <Compile Include="Models\UiOrder.cs" />
     <Compile Include="Models\UiRole.cs" />
@@ -273,6 +275,8 @@
     <Content Include="Views\Shared\_ShowPartial.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\MakeOrder.cshtml" />
+    <Content Include="Views\Home\ShowCategories.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

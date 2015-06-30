@@ -19,10 +19,24 @@ namespace ShopAround.Controllers
             this.db = Db;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page, int? categoryId)
         {
             ViewBag.Title = "Shop Around";
-            return View(db.ShopItems.ToList());
+            List<UiShopItem> list = null;
+            if (categoryId != null)
+                list = db.ShopItems.Where(i => i.CategoryId == categoryId).ToList();
+            else
+                list = db.ShopItems.ToList();
+
+
+            int itemsOnPage = 3;
+            int itemsCount = list.Count;
+            ViewBag.PagesCount = (int)Math.Ceiling(((double)itemsCount / (double)itemsOnPage));
+                        
+            int startIndex = page != null? (page.Value - 1) * itemsOnPage : 0;
+            int countOnPage = Math.Min(itemsCount - startIndex, 3);
+            list = list.GetRange(startIndex, countOnPage);
+            return View(list);
         }
 
 
@@ -109,6 +123,11 @@ namespace ShopAround.Controllers
                 return File(shopItem.Image, "image/jpg");
             else
                 return null;
+        }
+
+        public ActionResult ShowCategories()
+        {
+            return PartialView(db.Categories);
         }
     }
 }

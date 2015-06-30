@@ -10,47 +10,71 @@
             <div class="item-info">
                 <h3>@item.Category.Name</h3>
                 <div class="item-desc">
-                    <span></span>
+                    <p>
+                        <strong>@item.Name</strong>
+                        <strong class="price">@String.Format("{0:c}", item.Price)</strong>
+                    </p>
                 </div>
             </div>
+            @if (Request.IsAuthenticated)
+            {
+                <div class="admin-links">
+                    @if (HttpContext.Current.User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "EditShopItem", new { id = @item.Id })
+                        @Html.ActionLink("Delete", "DeleteShopItem", new { id = @item.Id })
+                    }
+                </div>
+            }
         </div>
     </li>
 }
 <div id="main">
     <div class="sidepanel">
-        <div class="container searchpanel">
-
-        </div>
-        <div class="container categories">
-        </div>
+        @{Html.RenderAction("Search", "Search");}
+        @{Html.RenderAction("ShowCategories");}
     </div>
     <div class="content">
-        <ul>
-            @for (int index = 0; index < Math.Min(Model.Count(), 3); index++)
-            {
-                @ShopItemPreview(Model.ElementAt(index));
-            }
-            
-        </ul>
+        <div id="slider" class="box">
+            <div id="slider-holder">
+                <ul>
+                    <li><a href="#"><img src="@Url.Content(@"~/Content/css/images/slide1.jpg")" alt="" /></a></li>
+                    <li><a href="#"><img src="@Url.Content(@"~/Content/css/images/slide1.jpg")" alt="" /></a></li>
+                    <li><a href="#"><img src="@Url.Content(@"~/Content/css/images/slide1.jpg")" alt="" /></a></li>
+                    <li><a href="#"><img src="@Url.Content(@"~/Content/css/images/slide1.jpg")" alt="" /></a></li>
+                </ul>
+            </div>
+            <div id="slider-nav">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+            </div>
+        </div>
+        <div class="products">
+            <ul>
+                @for (int index = 0; index < Math.Min(Model.Count(), 3); index++)
+                {
+                    @ShopItemPreview(Model.ElementAt(index));
+                }
+            </ul>
+            <div class="content-pages">
+                <ul>
+                    <li>
+                        @Html.ActionLink("First", "Index", new { page = 1, categoryId = Request.Params["CategoryId"] })
+                    </li>
+                    @{int curpage = Request.Params["page"] != null ? Int32.Parse(Request.Params["page"]) : 1;}
+                    @for (int index = Math.Max(curpage - 1, 1); index <= Math.Min(curpage + 1, (int)ViewBag.PagesCount); index++)
+                    {
+                        <li>
+                            @Html.ActionLink(index.ToString(), "Index", new { page = index, categoryId = Request.Params["CategoryId"] }, index == curpage ? new { @class = "active" } : null)
+                        </li>
+                    }
+                    <li>
+                        @Html.ActionLink("Last", "Index", new { page = (int)ViewBag.PagesCount, categoryId = Request.Params["CategoryId"] })
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-
-@*@item.Name &nbsp @item.Category.Name &nbsp @item.Price
-    @Html.ActionLink("Details", "ShowItem", new { id = @item.Id })
-    <span>&nbsp;</span>
-    @if (Request.IsAuthenticated)
-    {
-        if (HttpContext.Current.User.IsInRole("Admin"))
-        {
-            @Html.ActionLink("Edit", "EditShopItem", new { id = @item.Id })
-            <span>&nbsp;</span>
-            @Html.ActionLink("Delete", "DeleteShopItem", new { id = @item.Id })
-        }
-    }
-    @using (Html.BeginForm("AddItemToCart", "Cart", new { id = item.Id }, FormMethod.Post))
-    {
-        <input type="submit" value="Add to cart" />
-    }*@
