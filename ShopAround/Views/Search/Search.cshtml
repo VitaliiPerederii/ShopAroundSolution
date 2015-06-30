@@ -1,0 +1,23 @@
+﻿@model ShopAround.Models.SearchModel
+
+<div class="box search">
+    <h2>Search by <span></span></h2>
+    <div class="box-content">
+        <form action="#" method="post">
+            @Html.LabelFor(m => m.Keyword)
+            @Html.TextBoxFor(m => m.Keyword, new {@class = "field" })
+            
+
+            @Html.LabelFor(m => m.CategoryId)
+            @Html.DropDownListFor(m => m.CategoryId, ViewBag.Categories as SelectList, new { @class = "field" })
+
+            <div class="inline-field">
+                <label>Price</label>
+                @Html.DropDownListFor(m => m.MinPrice, ViewBag.PriceList as SelectList, new { @class = "field small-field" })
+                <label>to:</label>
+                @Html.DropDownListFor(m => m.MaxPrice, ViewBag.PriceList as SelectList, new { @class = "field small-field" })
+            </div>
+            <input type="submit" class="search-submit" value="Search" />
+        </form>
+    </div>
+</div>

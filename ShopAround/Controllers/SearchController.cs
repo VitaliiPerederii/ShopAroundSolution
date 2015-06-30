@@ -21,8 +21,11 @@ namespace ShopAround.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            SelectList list = new SelectList(db.Categories, "Id", "Name");
-             
+            List<UiCategory> catList = db.Categories.ToList();
+            catList.Insert(0, new UiCategory() { Id = -1, Name = "None" });
+
+            SelectList list = new SelectList(catList, "Id", "Name");
+            
             ViewBag.Categories = list;
             
             double minPrice = db.ShopItems.Min(m => m.Price);
@@ -30,13 +33,15 @@ namespace ShopAround.Controllers
 
             double increment = (maxPrice - minPrice) / 10;
             List<double> priceList = new List<double>();
+
             for (double value = minPrice; value < maxPrice; value += increment)
                 priceList.Add(value);
 
             priceList.Add(maxPrice);
+
             ViewBag.PriceList = new SelectList(priceList);
 
-            return PartialView();
+            return PartialView(new SearchModel() { MinPrice = minPrice, MaxPrice = maxPrice });
         }
 
         [HttpPost]
