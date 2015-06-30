@@ -67,7 +67,6 @@
     height: 64px;
     color: white;
     font-weight: bold;
-    
 }
     .navigation ul li a {
         height: 64px;
@@ -150,3 +149,16 @@
 
 }
 
+.item-info{
+    position:absolute;
+    top: 120px;
+    left:10px;
+    width: 153px
+}
+
+.item-info h3{
+    background-color: #8b0000;
+    color: white;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 10px
+}

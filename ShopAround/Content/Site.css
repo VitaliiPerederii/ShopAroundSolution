@@ -69,6 +69,7 @@ textarea {
 }
 
 .content ul li{
+    position:relative;
     float: left;
     display: block;
     margin: 5px 5px 5px 5px;
