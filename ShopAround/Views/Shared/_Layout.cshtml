@@ -35,7 +35,7 @@
                 @Html.ActionLink("Your shopping cart", "Index", "Cart", null, new { @class = "cart-link" })
                 <br />
                 <span>Articles: <strong>@Html.Action("GetCartItemsCount", "Cart")</strong></span>
-                <span>Cost: <strong>@Html.Action("GetCartItemsPrice", "Cart")</strong></span>
+                <span>Cost: <strong>@String.Format("{0:c}", Double.Parse(Html.Action("GetCartItemsPrice", "Cart").ToString()))</strong></span>
             </div>
             <div class="navigation">
                 <ul>
@@ -71,11 +71,18 @@
         @RenderBody()
         <div class="footer">
             <p class="left">
-                @Html.ActionLink("Home", "ShowItem")
+                @Html.ActionLink("Home", "Index")
                 <span>|</span>
                 @Html.ActionLink("Support", "/")
                 <span>|</span>
-                @Html.ActionLink("My Account", "/")
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("My Account", "ViewProfile", "Account")
+                }
+                else
+                {
+                    @ActiveActionLink("My Account", "Login", "Account")
+                }
                 <span>|</span>
                 @Html.ActionLink("The Store", "/")
                 <span>|</span>

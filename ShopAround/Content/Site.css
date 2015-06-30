@@ -60,27 +60,3 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
-
-.content ul {
-    list-style: none;
-    padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px
-    
-}
-
-.content ul li{
-    position:relative;
-    float: left;
-    display: block;
-    margin: 5px 5px 5px 5px;
-}
-
-.content ul li div{
-    padding: 2px 2px 2px 2px;
-    border: 1px solid gray
-}
-
-.content ul img{
-    width: 225px;
-    height:500px
-}
