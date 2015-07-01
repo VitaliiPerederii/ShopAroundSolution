@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ShopAround.Models.UiCategory>
+
+<div class="box categories">
+    <h2>Categories <span></span></h2>
+    <div class="box-content">
+        <ul>
+            @foreach (ShopAround.Models.UiCategory cat in Model)
+            {
+                <li>
+                    @{
+                        int curId = Request.Params["CategoryId"] != null? Int32.Parse(Request.Params["CategoryId"].ToString()): -1;
+                        bool active = curId == cat.Id;
+                     }
+                    @Html.ActionLink(cat.Name, "Index", "Home", new { categoryId = cat.Id }, active? new { @class = "active"}: null)
+                </li>
+            }
+        </ul>
+    </div>
+</div>
