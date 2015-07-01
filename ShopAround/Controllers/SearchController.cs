@@ -18,7 +18,6 @@ namespace ShopAround.Controllers
             db = storage;
         }
 
-        [HttpGet]
         public ActionResult Search()
         {
             List<UiCategory> catList = db.Categories.ToList();
@@ -41,16 +40,11 @@ namespace ShopAround.Controllers
 
             ViewBag.PriceList = new SelectList(priceList);
 
-            return PartialView(new SearchModel() { MinPrice = minPrice, MaxPrice = maxPrice });
-        }
+            SearchModel model = Session["SearchModel"] as SearchModel;
+            if (model == null)
+                model = new SearchModel() { MinPrice = minPrice, MaxPrice = maxPrice };
 
-        [HttpPost]
-        public ActionResult Search(SearchModel model)
-        {
-            SelectList list = new SelectList(db.Categories, "Id", "Name");
-            ViewBag.Categories = list;
-            return PartialView();
+            return PartialView(model);
         }
-
     }
 }

@@ -3,7 +3,9 @@
 <div class="box search">
     <h2>Search by <span></span></h2>
     <div class="box-content">
-        <form action="#" method="post">
+        @using (Html.BeginForm("SearchResult", "Home", null, FormMethod.Post,
+                              new { enctype = "multipart/form-data" }))
+        {
             @Html.LabelFor(m => m.Keyword)
             @Html.TextBoxFor(m => m.Keyword, new {@class = "field" })
             
@@ -18,6 +20,6 @@
                 @Html.DropDownListFor(m => m.MaxPrice, ViewBag.PriceList as SelectList, new { @class = "field small-field" })
             </div>
             <input type="submit" class="search-submit" value="Search" />
-        </form>
+        }
     </div>
 </div>

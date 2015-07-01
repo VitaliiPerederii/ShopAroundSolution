@@ -32,7 +32,7 @@
 <div id="main">
     <div class="sidepanel">
         @{Html.RenderAction("Search", "Search");}
-        @*@{Html.RenderAction("ShowCategories");}*@
+        @{Html.RenderAction("ShowCategories");}
     </div>
     <div class="content">
         <div id="slider" class="box">
@@ -61,17 +61,17 @@
             <div class="content-pages">
                 <ul>
                     <li>
-                        @Html.ActionLink("First", "Index", new { page = 1, categoryId = Request.Params["CategoryId"] })
+                        @Html.ActionLink("First", ViewContext.RouteData.GetRequiredString("action"), new { page = 1, categoryId = Request.Params["CategoryId"] })
                     </li>
                     @{int curpage = Request.Params["page"] != null ? Int32.Parse(Request.Params["page"]) : 1;}
                     @for (int index = Math.Max(curpage - 1, 1); index <= Math.Min(curpage + 1, (int)ViewBag.PagesCount); index++)
                     {
                         <li>
-                            @Html.ActionLink(index.ToString(), "Index", new { page = index, categoryId = Request.Params["CategoryId"] }, index == curpage ? new { @class = "active" } : null)
+                            @Html.ActionLink(index.ToString(), ViewContext.RouteData.GetRequiredString("action"), new { page = index, categoryId = Request.Params["CategoryId"] }, index == curpage ? new { @class = "active" } : null)
                         </li>
                     }
                     <li>
-                        @Html.ActionLink("Last", "Index", new { page = (int)ViewBag.PagesCount, categoryId = Request.Params["CategoryId"] })
+                        @Html.ActionLink("Last", ViewContext.RouteData.GetRequiredString("action"), new { page = (int)ViewBag.PagesCount, categoryId = Request.Params["CategoryId"] })
                     </li>
                 </ul>
             </div>
