@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using ShopAround.Abstract;
 using ShopAround.Models;
-using ShopAround.Utils;
-
 
 namespace ShopAround.Controllers
 {
