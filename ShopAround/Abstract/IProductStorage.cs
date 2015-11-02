@@ -13,13 +13,10 @@ namespace ShopAround.Abstract
         void AddShopItem(UiShopItem item);
         void UpdateShopItem(UiShopItem item);
         void DeleteShopItem(int Id);
-
         IQueryable<UiCategory> Categories { get; }
-
         UiUser FindUser(string name);
         void AddUser(UiUser user);
         void AddRole(UiRole role);
-
         void CommitOrder(UiOrder order);
     }
 }

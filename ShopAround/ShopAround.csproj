@@ -137,6 +137,7 @@
     <Compile Include="Concrete\CustomMembershipProvider.cs" />
     <Compile Include="Concrete\CustomRoleProvider.cs" />
     <Compile Include="Concrete\DatabaseProductStorage.cs" />
+    <Compile Include="Concrete\NHibernateProductStorage.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -290,6 +291,10 @@
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
       <Project>{e995ee0b-e2e6-4a99-b874-c3bbe3924da4}</Project>
       <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HibernateDataLayer\HibernateDataLayer.csproj">
+      <Project>{a7d397f3-788a-49a5-b2bf-0b524782c0e2}</Project>
+      <Name>HibernateDataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
