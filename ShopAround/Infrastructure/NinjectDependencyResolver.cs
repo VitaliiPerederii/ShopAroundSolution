@@ -28,7 +28,8 @@ namespace ShopAround.Infrastructure
         }
         private void AddBindings()
         {
-            kernel.Bind<IProductStorage>().To<DatabaseProductStorage>();
+            //kernel.Bind<IProductStorage>().To<DatabaseProductStorage>();
+            kernel.Bind<IProductStorage>().To<NHibernateProductStorage>();
         }
     }
 }

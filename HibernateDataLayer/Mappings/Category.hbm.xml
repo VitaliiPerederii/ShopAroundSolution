@@ -3,15 +3,10 @@
           assembly="HibernateDataLayer" 
           namespace="HibernateDataLayer">
  
-  <class name="ShopItem" lazy="false">
+  <class name="Category" lazy="false">
     <id name="Id">
       <generator class="native" />
     </id>
     <property name="Name" />
-    <property name="CategoryId" />
-    <property name="Description" />
-    <property name="Price" />
-    <property name="Available" />
-    <property name="Image" />
   </class>
 </hibernate-mapping>

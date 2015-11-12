@@ -13,7 +13,7 @@ namespace HibernateDataLayer
         private static ISessionFactory _sessionFactory;
         
 
-        public ISessionFactory SessionFactory
+        public static ISessionFactory SessionFactory
         {
             get
             {
@@ -27,6 +27,11 @@ namespace HibernateDataLayer
                 
                 return _sessionFactory;
             }
+        }
+
+        public static ISession OpenSession()
+        {
+            return SessionFactory.OpenSession();
         }
     }
 }

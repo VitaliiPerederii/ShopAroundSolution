@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HibernateDataLayer
 {
-    public partial class ShopItem
+    public class ShopItem
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -31,6 +31,7 @@ namespace ShopAround
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
+            AutoMapperConfig.Configure();
         }
     }
 }

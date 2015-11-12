@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using ShopAround.Abstract;
 using ShopAround.Models;
+using HibernateDataLayer;
+using NHibernate;
+using NHibernate.Linq;
+using AutoMapper;
 
 namespace ShopAround.Concrete
 {
@@ -13,27 +17,44 @@ namespace ShopAround.Concrete
         { 
             get
             {
-                return null;
+                using (ISession session = NHibernateHelper.OpenSession())
+                {
+                    IEnumerable<ShopItem> shopItems = session.Query<ShopItem>().ToArray();
+                    return Mapper.Map<IEnumerable<ShopItem>, IEnumerable<UiShopItem>>(shopItems).AsQueryable();
+                }
             }
-
         }
         public virtual void AddShopItem(UiShopItem item)
         {
-            
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                session.Save(Mapper.Map<UiShopItem, ShopItem>(item));
+            }
         }
         public virtual void UpdateShopItem(UiShopItem item)
         {
-
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                session.Update(Mapper.Map<UiShopItem, ShopItem>(item));
+            }
         }
         public virtual void DeleteShopItem(int Id)
         {
-
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                ShopItem shopItems = session.Query<ShopItem>().FirstOrDefault(si => si.Id == Id);
+                session.Delete(shopItems);
+            }
         }
         public virtual IQueryable<UiCategory> Categories 
         {
             get
             {
-                return null;
+                using (ISession session = NHibernateHelper.OpenSession())
+                {
+                    IEnumerable<Category> categories = session.Query<Category>().ToArray();
+                    return Mapper.Map<IEnumerable<Category>, IEnumerable<UiCategory>>(categories).AsQueryable();
+                }
             }
         }
         public virtual UiUser FindUser(string name)
