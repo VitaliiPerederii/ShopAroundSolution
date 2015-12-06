@@ -3,12 +3,13 @@
           assembly="HibernateDataLayer" 
           namespace="HibernateDataLayer">
  
-  <class name="ShopItem" lazy="false">
+  <class name="ShopItem" lazy="true">
     <id name="Id">
       <generator class="native" />
     </id>
     <property name="Name" />
     <property name="CategoryId" />
+    <many-to-one name="Category" class="Category" column="CategoryId" />
     <property name="Description" />
     <property name="Price" />
     <property name="Available" />

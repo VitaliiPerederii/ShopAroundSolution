@@ -47,8 +47,10 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="NHibernateHelper.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="ShopItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mappings\ShopItem.hbm.xml">
@@ -62,6 +64,8 @@
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Mappings\Role.hbm.xml" />
+    <Content Include="Mappings\User.hbm.xml" />
     <EmbeddedResource Include="Mappings\Category.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

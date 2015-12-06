@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
-          assembly="HibernateDataLayer" 
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+          assembly="HibernateDataLayer"
           namespace="HibernateDataLayer">
- 
-  <class name="Category" lazy="true">
+
+  <class name="User" lazy="true">
     <id name="Id">
       <generator class="native" />
     </id>

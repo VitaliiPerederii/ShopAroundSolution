@@ -28,8 +28,9 @@ namespace ShopAround.Infrastructure
         }
         private void AddBindings()
         {
-            //kernel.Bind<IProductStorage>().To<DatabaseProductStorage>();
-            kernel.Bind<IProductStorage>().To<NHibernateProductStorage>();
+            string dataProvider = ConfigurationManager.AppSettings["DataProvider"];
+            kernel.Bind<IProductStorage>().To<DatabaseProductStorage>().When((a) => dataProvider == "EntityFramework");
+            kernel.Bind<IProductStorage>().To<NHibernateProductStorage>().When((a) => dataProvider == "Hibernate");
         }
     }
 }

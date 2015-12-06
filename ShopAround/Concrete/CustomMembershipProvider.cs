@@ -60,7 +60,7 @@ namespace ShopAround.Concrete
                     membershipUser = GetUser(email, false);
                     return membershipUser;
                 }
-                catch
+                catch (Exception ex)
                 {
                     return null;
                 }

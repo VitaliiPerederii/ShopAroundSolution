@@ -59,11 +59,21 @@ namespace ShopAround.Concrete
         }
         public virtual UiUser FindUser(string name)
         {
-            return new UiUser();
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                User user = session.Query<User>().Where(u => u.Email == name).FirstOrDefault();
+                return Mapper.Map<User, UiUser>(user);
+            }
+
         }
         public virtual void AddUser(UiUser user)
         {
-
+            using (ISession session = NHibernateHelper.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                session.Save(Mapper.Map<UiUser, User>(user));
+                transaction.Commit();
+            }
         }
         public virtual void AddRole(UiRole role)
         {
