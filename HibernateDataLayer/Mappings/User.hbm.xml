@@ -3,14 +3,14 @@
           assembly="HibernateDataLayer"
           namespace="HibernateDataLayer">
 
-  <class name="User" lazy="true">
+  <class name="User" lazy="true" table="[User]">
     <id name="Id">
       <generator class="native" />
     </id>
     <property name="Email" />
     <property name="Name" />
     <property name="Password" />
-    <property name="RoleId" />
+    <property name="RoleId" insert="false" update="false"/>
     <many-to-one name="Role" class="Role" column="RoleId" />
   </class>
 </hibernate-mapping>

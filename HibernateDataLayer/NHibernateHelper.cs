@@ -21,7 +21,7 @@ namespace HibernateDataLayer
                 {
                     Configuration cfg = new Configuration();
                     cfg.Configure();
-                    //cfg.AddAssembly(typeof(ShopItem).Assembly);
+                    cfg.AddAssembly(typeof(ShopItem).Assembly);
                     _sessionFactory = cfg.BuildSessionFactory();
                 }
                 

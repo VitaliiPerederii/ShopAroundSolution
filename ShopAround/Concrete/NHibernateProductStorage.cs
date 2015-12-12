@@ -69,10 +69,13 @@ namespace ShopAround.Concrete
         public virtual void AddUser(UiUser user)
         {
             using (ISession session = NHibernateHelper.OpenSession())
-            using (ITransaction transaction = session.BeginTransaction())
+            using (ITransaction tran = session.BeginTransaction())
             {
-                session.Save(Mapper.Map<UiUser, User>(user));
-                transaction.Commit();
+                User coreUser = Mapper.Map<UiUser, User>(user);
+                coreUser.Role = session.Query<Role>().Where(r => r.Id == coreUser.RoleId).FirstOrDefault();
+                session.Save(coreUser);
+                tran.Commit();
+                
             }
         }
         public virtual void AddRole(UiRole role)
