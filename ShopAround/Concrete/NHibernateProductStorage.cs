@@ -28,14 +28,18 @@ namespace ShopAround.Concrete
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                session.Save(Mapper.Map<UiShopItem, ShopItem>(item));
+                ShopItem coreShopItem = Mapper.Map<UiShopItem, ShopItem>(item);
+                coreShopItem.Category = session.Load<Category>(coreShopItem.CategoryId);
+                session.Save(coreShopItem);
             }
         }
         public virtual void UpdateShopItem(UiShopItem item)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                session.Update(Mapper.Map<UiShopItem, ShopItem>(item));
+                ShopItem coreShopItem = Mapper.Map<UiShopItem, ShopItem>(item);
+                coreShopItem.Category = session.Load<Category>(coreShopItem.CategoryId);
+                session.Update(coreShopItem);
             }
         }
         public virtual void DeleteShopItem(int Id)
