@@ -20,7 +20,7 @@ namespace ShopAround
         {
             string root = Server.MapPath("~/");
             string parent = Path.GetDirectoryName(root);
-            string grandParent = Path.GetDirectoryName(parent) + "\\DataLayer";
+            string grandParent = Path.GetDirectoryName(parent) + "\\Db";
 
             AppDomain.CurrentDomain.SetData("DataDirectory", grandParent);
             AreaRegistration.RegisterAllAreas();

@@ -4,9 +4,8 @@
     <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
     <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
     <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
-    <property name="connection.connection_string">Data Source=(LocalDB)\v11.0;AttachDbFilename=D:\Job\SkillUp\ShopAroundSolution\ShopAround\bin\ShopAround.mdf;Integrated Security=True;Connect Timeout=30;</property>
+    <property name="connection.connection_string">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Solutions\Db\ShopAround.mdf;Integrated Security=True;Connect Timeout=30</property>
 
     <property name="show_sql">true</property>
-    <mapping assembly="HibernateDataLayer"/>
   </session-factory>
 </hibernate-configuration>

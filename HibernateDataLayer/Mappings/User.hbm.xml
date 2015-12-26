@@ -10,7 +10,6 @@
     <property name="Email" />
     <property name="Name" />
     <property name="Password" />
-    <property name="RoleId" insert="false" update="false"/>
     <many-to-one name="Role" class="Role" column="RoleId" />
   </class>
 </hibernate-mapping>

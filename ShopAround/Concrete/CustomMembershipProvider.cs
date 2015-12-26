@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Web.Helpers;
-using System.Security.Cryptography;
-using System.Web.WebPages;
-using Microsoft.Internal.Web.Utils;
 using ShopAround.Models;
 using ShopAround.Abstract;
-using Ninject;
+using System.Web.Helpers;
 
 namespace ShopAround.Concrete
 {
@@ -60,7 +53,7 @@ namespace ShopAround.Concrete
                     membershipUser = GetUser(email, false);
                     return membershipUser;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return null;
                 }

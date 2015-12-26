@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ShopAround.Models
+﻿namespace ShopAround.Models
 {
     public class SearchModel
     {
