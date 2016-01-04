@@ -8,11 +8,12 @@
       <generator class="native" />
     </id>
     <property name="Name" />
-    <property name="CategoryId" />
     <many-to-one name="Category" class="Category" column="CategoryId" />
     <property name="Description" />
     <property name="Price" />
-    <property name="Available" />
-    <property name="Image" />
+    <property name="Available"/>
+    <property name="Image" type="BinaryBlob">
+      <column name="Image" sql-type="varbinary(MAX)" />
+    </property>
   </class>
 </hibernate-mapping>

@@ -39,7 +39,7 @@ namespace ShopAround.Concrete
             {
                 ShopItem coreShopItem = Mapper.Map<UiShopItem, ShopItem>(item);
                 coreShopItem.Category = session.Load<Category>(coreShopItem.CategoryId);
-                session.Update(coreShopItem);
+                session.SaveOrUpdate(coreShopItem);
             }
         }
         public virtual void DeleteShopItem(int Id)
