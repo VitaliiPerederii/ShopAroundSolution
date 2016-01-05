@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="NHibernateHelper.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderShopItem.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="ShopItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +65,10 @@
   <ItemGroup>
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mappings\Order.hbm.xml" />
+    <Content Include="Mappings\OrderShopItem.hbm.xml">
+      <SubType>Designer</SubType>
     </Content>
     <EmbeddedResource Include="Mappings\Role.hbm.xml" />
     <EmbeddedResource Include="Mappings\User.hbm.xml">

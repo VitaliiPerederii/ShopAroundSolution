@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using ShopAround.Abstract;
 using ShopAround.Models;
 using HibernateDataLayer;
@@ -36,10 +34,14 @@ namespace ShopAround.Concrete
         public virtual void UpdateShopItem(UiShopItem item)
         {
             using (ISession session = NHibernateHelper.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
             {
-                ShopItem coreShopItem = Mapper.Map<UiShopItem, ShopItem>(item);
-                coreShopItem.Category = session.Load<Category>(coreShopItem.CategoryId);
-                session.SaveOrUpdate(coreShopItem);
+                ShopItem shopItem = session.Get<ShopItem>(item.Id);
+                Mapper.Map(item, shopItem);
+
+                shopItem.Category = session.Load<Category>(shopItem.CategoryId);
+                session.SaveOrUpdate(shopItem);
+                transaction.Commit();
             }
         }
         public virtual void DeleteShopItem(int Id)
