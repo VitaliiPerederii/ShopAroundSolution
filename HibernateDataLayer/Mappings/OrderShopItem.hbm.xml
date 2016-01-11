@@ -1,1 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+          assembly="HibernateDataLayer" 
+          namespace="HibernateDataLayer">
+ 
+  <class name="OrderShopItem" lazy="true">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="Name" />
+    <property name="Quantity" />
+    <many-to-one name="Order" class="Order" column="OrderId" cascade="all" />
+    <many-to-one name="ShopItem" class="ShopItem" column="ShopItemId" cascade="all" />
+  </class>
+</hibernate-mapping>

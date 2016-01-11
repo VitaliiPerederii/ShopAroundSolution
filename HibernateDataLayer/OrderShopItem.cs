@@ -8,9 +8,9 @@ namespace HibernateDataLayer
 {
     public class OrderShopItem
     {
-        public int OrderId { get; set; }
-        public int ShopItemId { get; set; }
-        public int Quantity { get; set; }
+        public virtual int OrderId { get; set; }
+        public virtual int ShopItemId { get; set; }
+        public virtual int Quantity { get; set; }
 
         public virtual Order Order { get; set; }
         public virtual ShopItem ShopItem { get; set; }

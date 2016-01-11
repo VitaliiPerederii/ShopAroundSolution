@@ -66,10 +66,10 @@
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Mappings\Order.hbm.xml" />
-    <Content Include="Mappings\OrderShopItem.hbm.xml">
+    <EmbeddedResource Include="Mappings\Order.hbm.xml" />
+    <EmbeddedResource Include="Mappings\OrderShopItem.hbm.xml">
       <SubType>Designer</SubType>
-    </Content>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mappings\Role.hbm.xml" />
     <EmbeddedResource Include="Mappings\User.hbm.xml">
       <SubType>Designer</SubType>

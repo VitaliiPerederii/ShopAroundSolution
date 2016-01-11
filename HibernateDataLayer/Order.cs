@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HibernateDataLayer
 {
     public class Order
     {
-        public Order()
-        {
-            this.OrderShopItem = new HashSet<OrderShopItem>();
-        }
-
-        public int Id { get; set; }
-        public System.DateTime Date { get; set; }
-        public string ShipAddress { get; set; }
-        public bool Proceed { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerEmail { get; set; }
-
-        public virtual ICollection<OrderShopItem> OrderShopItem { get; set; }
+        public virtual int Id { get; set; }
+        public virtual DateTime Date { get; set; }
+        public virtual string ShipAddress { get; set; }
+        public virtual bool Proceed { get; set; }
+        public virtual string CustomerName { get; set; }
+        public virtual string CustomerEmail { get; set; }
+        public virtual IList<OrderShopItem> OrderShopItem { get; set; }
     }
 }
