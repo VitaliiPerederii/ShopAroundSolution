@@ -3,7 +3,7 @@
           assembly="HibernateDataLayer"
           namespace="HibernateDataLayer">
 
-  <class name="Order" lazy="true">
+  <class name="Order" lazy="true" table="[Order]">
     <id name="Id">
       <generator class="native" />
     </id>
@@ -12,7 +12,7 @@
     <property name="Proceed" />
     <property name="CustomerName" />
     <property name="CustomerEmail" />
-    <bag name="OrderShopItem" lazy="true" inverse="true" batch-size="25" cascade="all-delete-orphan">
+    <bag name="OrderShopItem" cascade="all">
       <key column="Id" />
       <one-to-many class="OrderShopItem" />
     </bag>

@@ -4,9 +4,9 @@
           namespace="HibernateDataLayer">
  
   <class name="OrderShopItem" lazy="true">
-    <composite-id>
-      <many-to-one name="Order" class="Order" column="OrderId" cascade="all" />
-      <many-to-one name="ShopItem" class="ShopItem" column="ShopItemId" cascade="all" />
+  <composite-id name="Id" class="CompositeId">
+      <key-property name="OrderId" column="OrderId" />
+      <key-property name="ShopItemId" column="ShopItemId" />
     </composite-id>
     <property name="Quantity" />
   </class>

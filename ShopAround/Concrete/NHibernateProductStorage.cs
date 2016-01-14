@@ -87,7 +87,28 @@ namespace ShopAround.Concrete
         }
         public virtual void CommitOrder(UiOrder order)
         {
-
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                Order coreOrder = Mapper.Map<UiOrder, Order>(order);
+                if (order.Cart != null)
+                {
+                    coreOrder.OrderShopItem = new List<OrderShopItem>();
+                    foreach (CartItem item in order.Cart.Items)
+                    {
+                        OrderShopItem orsh = new OrderShopItem()
+                        {
+                            Id = new CompositeId()
+                            {
+                                ShopItemId = item.ShopItem.Id,
+                                OrderId = coreOrder.Id
+                            },
+                            Quantity = item.Quantity,
+                        };
+                        coreOrder.OrderShopItem.Add(orsh);
+                    }
+                }
+                session.Save(coreOrder);
+            }
         }
     }
 }

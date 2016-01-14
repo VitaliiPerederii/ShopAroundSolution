@@ -14,6 +14,7 @@ namespace ShopAround.Infrastructure
             Mapper.CreateMap<Models.UiUser, HibernateDataLayer.User>();
 
             Mapper.CreateMap<HibernateDataLayer.Role, Models.UiRole>();
+            Mapper.CreateMap<Models.UiOrder, HibernateDataLayer.Order>();
         }
     }
 }
