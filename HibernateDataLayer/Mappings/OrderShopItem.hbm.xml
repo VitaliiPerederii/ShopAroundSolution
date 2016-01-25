@@ -4,7 +4,7 @@
           namespace="HibernateDataLayer">
  
   <class name="OrderShopItem" lazy="true">
-  <composite-id name="Id" class="CompositeId">
+  <composite-id name="Id" class="CompositeId" mapped="true">
       <key-property name="OrderId" column="OrderId" />
       <key-property name="ShopItemId" column="ShopItemId" />
     </composite-id>
