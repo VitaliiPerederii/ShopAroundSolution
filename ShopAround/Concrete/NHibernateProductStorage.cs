@@ -91,7 +91,7 @@ namespace ShopAround.Concrete
             using (ITransaction transaction = session.BeginTransaction())
             {
                 Order coreOrder = Mapper.Map<UiOrder, Order>(order);
-                
+                session.Save(coreOrder);
                 if (order.Cart != null)
                 {
                     coreOrder.OrderShopItem = new List<OrderShopItem>();
@@ -107,10 +107,9 @@ namespace ShopAround.Concrete
                             Quantity = item.Quantity,
                         };
                         coreOrder.OrderShopItem.Add(orsh);
-                        //session.Save(orsh);
+                        session.Save(orsh);
                     }
                 }
-                session.Save(coreOrder);
                 transaction.Commit();
             }
         }

@@ -12,7 +12,7 @@
     <property name="Proceed" />
     <property name="CustomerName" />
     <property name="CustomerEmail" />
-    <bag name="OrderShopItem" cascade="all" inverse="true">
+    <bag name="OrderShopItem" inverse="true">
       <key column="Id" />
       <one-to-many class="OrderShopItem" />
     </bag>
