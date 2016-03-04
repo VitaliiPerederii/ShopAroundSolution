@@ -18,7 +18,6 @@ namespace ShopAround.Concrete
         IProductStorage db = null;
         public CustomRoleProvider()
         {
-            db = DependencyResolver.Current.GetService<IProductStorage>();
         }
         public override string[] GetRolesForUser(string email)
         {

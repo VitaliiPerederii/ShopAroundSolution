@@ -4,17 +4,17 @@ using System.Web.Security;
 using ShopAround.Models;
 using ShopAround.Abstract;
 using System.Web.Helpers;
+using Ninject;
 
 namespace ShopAround.Concrete
 {
     public class CustomMembershipProvider : MembershipProvider
     {
-        IProductStorage db = null;
+        [Inject]
+        IProductStorage Db { get; set; }
         public CustomMembershipProvider()
         {
-            db = DependencyResolver.Current.GetService<IProductStorage>();
         }
-
       
         public override bool ValidateUser(string username, string password)
         {
@@ -22,7 +22,7 @@ namespace ShopAround.Concrete
 
             try
             {
-                UiUser user = db.FindUser(username);
+                UiUser user = Db.FindUser(username);
                 if (user != null && Crypto.VerifyHashedPassword(user.Password, password))
                 {
                     isValid = true;
@@ -49,7 +49,7 @@ namespace ShopAround.Concrete
                     user.Name = userName;
                     user.RoleId = 1;
 
-                    db.AddUser(user);
+                    Db.AddUser(user);
                     membershipUser = GetUser(email, false);
                     return membershipUser;
                 }
@@ -66,7 +66,7 @@ namespace ShopAround.Concrete
             try
             {
 
-                UiUser user = db.FindUser(email);
+                UiUser user = Db.FindUser(email);
                 if (user != null)
                 {
                     MembershipUser memberUser = new MembershipUser("MyMembershipProvider", user.Email, null, null, null, null,

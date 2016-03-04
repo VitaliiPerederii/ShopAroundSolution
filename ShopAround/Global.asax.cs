@@ -8,6 +8,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using ShopAround.Infrastructure;
 using System.IO;
+using System.Web.Security;
+using ShopAround.Concrete;
 
 namespace ShopAround
 {
@@ -29,7 +31,6 @@ namespace ShopAround
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             AutoMapperConfig.Configure();
         }

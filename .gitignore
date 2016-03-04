@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/HibernateDataLayer/bin/Debug
+/HibernateDataLayer/obj/Debug
+*.dll
+/.vs
+/packages
+/ShopAround/bin
+/ShopAround.Tests.Unit/bin/Debug
+/ShopAround.Tests.Unit/obj/Debug

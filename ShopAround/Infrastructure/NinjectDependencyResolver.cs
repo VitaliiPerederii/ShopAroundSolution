@@ -7,6 +7,7 @@ using Ninject.Syntax;
 using System.Configuration;
 using ShopAround.Abstract;
 using ShopAround.Concrete;
+using System.Web.Security;
 
 namespace ShopAround.Infrastructure
 {
@@ -31,6 +32,8 @@ namespace ShopAround.Infrastructure
             string dataProvider = ConfigurationManager.AppSettings["DataProvider"];
             kernel.Bind<IProductStorage>().To<DatabaseProductStorage>().When((a) => dataProvider == "EntityFramework");
             kernel.Bind<IProductStorage>().To<NHibernateProductStorage>().When((a) => dataProvider == "Hibernate");
+            kernel.Inject(Membership.Provider);
+            //Roles.Providers.Add(DependencyResolver.Current.GetService<CustomRoleProvider>());
         }
     }
 }
