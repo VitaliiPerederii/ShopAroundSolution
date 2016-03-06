@@ -1,17 +1,16 @@
-﻿using System;
-using System.Web.Mvc;
-using System.Web.Security;
-using ShopAround.Models;
+﻿using Ninject;
 using ShopAround.Abstract;
+using ShopAround.Models;
+using System;
 using System.Web.Helpers;
-using Ninject;
+using System.Web.Security;
 
 namespace ShopAround.Concrete
 {
     public class CustomMembershipProvider : MembershipProvider
     {
         [Inject]
-        IProductStorage Db { get; set; }
+        public  IProductStorage Db { get; set; }
         public CustomMembershipProvider()
         {
         }
@@ -37,6 +36,9 @@ namespace ShopAround.Concrete
 
         public MembershipUser CreateUser(string email, string password, string userName)
         {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(userName))
+                return null;
+
             MembershipUser membershipUser = GetUser(email, false);
 
             if (membershipUser == null)
@@ -74,7 +76,7 @@ namespace ShopAround.Concrete
                     return memberUser;
                 }
             }
-            catch
+            catch (Exception)
             {
                 return null;
             }

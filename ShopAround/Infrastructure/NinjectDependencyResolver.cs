@@ -33,7 +33,7 @@ namespace ShopAround.Infrastructure
             kernel.Bind<IProductStorage>().To<DatabaseProductStorage>().When((a) => dataProvider == "EntityFramework");
             kernel.Bind<IProductStorage>().To<NHibernateProductStorage>().When((a) => dataProvider == "Hibernate");
             kernel.Inject(Membership.Provider);
-            //Roles.Providers.Add(DependencyResolver.Current.GetService<CustomRoleProvider>());
+            kernel.Inject(Roles.Provider);
         }
     }
 }

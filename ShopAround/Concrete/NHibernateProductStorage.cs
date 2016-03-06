@@ -47,9 +47,11 @@ namespace ShopAround.Concrete
         public virtual void DeleteShopItem(int Id)
         {
             using (ISession session = NHibernateHelper.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
             {
                 ShopItem shopItems = session.Query<ShopItem>().FirstOrDefault(si => si.Id == Id);
                 session.Delete(shopItems);
+                transaction.Commit();
             }
         }
         public virtual IQueryable<UiCategory> Categories 

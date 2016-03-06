@@ -10,12 +10,14 @@ using System.Web.WebPages;
 using Microsoft.Internal.Web.Utils;
 using ShopAround.Models;
 using ShopAround.Abstract;
+using Ninject;
 
 namespace ShopAround.Concrete
 {
     public class CustomRoleProvider : RoleProvider
     {
-        IProductStorage db = null;
+        [Inject]
+        public IProductStorage Db { get; set; }
         public CustomRoleProvider()
         {
         }
@@ -25,7 +27,7 @@ namespace ShopAround.Concrete
 
             try
             {
-                UiUser user = db.FindUser(email);
+                UiUser user = Db.FindUser(email);
                 if (user != null)
                 {
                     UiRole userRole = user.Role;
@@ -43,15 +45,18 @@ namespace ShopAround.Concrete
         }
         public override void CreateRole(string roleName)
         {
+            if (string.IsNullOrEmpty(roleName))
+                return;
+
             UiRole newRole = new UiRole() { Name = roleName };
-            db.AddRole(newRole);
+            Db.AddRole(newRole);
         }
         public override bool IsUserInRole(string username, string roleName)
         {
             bool outputResult = false;
             try
             {
-                UiUser user = db.FindUser(username);
+                UiUser user = Db.FindUser(username);
                 if (user != null)
                 {
                     UiRole userRole = user.Role;
