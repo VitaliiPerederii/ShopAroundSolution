@@ -32,6 +32,8 @@ namespace ShopAround.Infrastructure
             string dataProvider = ConfigurationManager.AppSettings["DataProvider"];
             kernel.Bind<IProductStorage>().To<DatabaseProductStorage>().When((a) => dataProvider == "EntityFramework");
             kernel.Bind<IProductStorage>().To<NHibernateProductStorage>().When((a) => dataProvider == "Hibernate");
+            kernel.Bind<IMembershipMngr>().To<MembershipMngr>();
+
             kernel.Inject(Membership.Provider);
             kernel.Inject(Roles.Provider);
         }

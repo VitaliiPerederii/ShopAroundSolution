@@ -144,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IMembershipProvider.cs" />
     <Compile Include="Abstract\IProductStorage.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Concrete\CustomMembershipProvider.cs" />
     <Compile Include="Concrete\CustomRoleProvider.cs" />
     <Compile Include="Concrete\DatabaseProductStorage.cs" />
+    <Compile Include="Concrete\MembershipMngr.cs" />
     <Compile Include="Concrete\NHibernateProductStorage.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />

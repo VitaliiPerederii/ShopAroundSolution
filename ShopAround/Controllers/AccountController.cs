@@ -10,11 +10,13 @@ namespace ShopAround.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-
         IProductStorage db;
-        public AccountController(IProductStorage storage)
+        IMembershipMngr membMngr;
+
+        public AccountController(IProductStorage storage, IMembershipMngr membMngr)
         {
             db = storage;
+            this.membMngr = membMngr;
         }
 
         public ActionResult Login()
@@ -24,9 +26,9 @@ namespace ShopAround.Controllers
         [HttpPost]
         public ActionResult Login(LogOnModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (model != null && ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.Email, model.Password))
+                if (membMngr.ValidateUser(model.Email, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
@@ -62,7 +64,7 @@ namespace ShopAround.Controllers
         {
             if (ModelState.IsValid)
             {
-                MembershipUser membershipUser = ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Email, model.Password, model.Name);
+                MembershipUser membershipUser = membMngr.CreateUser(model.Email, model.Password, model.Name);
 
                 if (membershipUser != null)
                 {
@@ -80,7 +82,7 @@ namespace ShopAround.Controllers
         public ActionResult ViewProfile()
         {
             UiUser uiUser = null;
-            MembershipUser user = Membership.GetUser();
+            MembershipUser user = membMngr.GetUser();
             if (user != null)
             {
                 uiUser = db.FindUser(user.UserName);

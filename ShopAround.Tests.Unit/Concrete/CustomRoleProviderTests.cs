@@ -2,7 +2,6 @@
 using Moq;
 using ShopAround.Abstract;
 using ShopAround.Models;
-using System.Web.Helpers;
 
 namespace ShopAround.Concrete.Tests
 {
