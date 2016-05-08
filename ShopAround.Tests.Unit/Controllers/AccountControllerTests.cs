@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using ShopAround.Abstract;
+using System.Web.Mvc;
 
 namespace ShopAround.Controllers.Tests
 {
@@ -8,14 +9,24 @@ namespace ShopAround.Controllers.Tests
     public class AccountControllerTests
     {
         [TestMethod()]
-        public void LoginControllerTest()
+        public void Login_CredsIncorrect_ReturnsViewWithModel()
         {
-            Mock<IProductStorage> mock = new Mock<IProductStorage>();
-            AccountController controller = new AccountController(mock.Object);
+            Mock<IMembershipMngr> mock = new Mock<IMembershipMngr>();
+            mock.Setup(m => m.ValidateUser(It.IsAny<string>(), It.IsAny<string>())).Returns((string one, string two) => false);
+            AccountController controller = new AccountController(null, mock.Object);
 
-            controller.Login(new Models.LogOnModel(), null);
+            Models.LogOnModel model = new Models.LogOnModel()
+            {
+                Email = "test",
+                Password = "test1"
+            };
 
-            Assert.Fail();
+            ActionResult result = controller.Login(model, null);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            ViewResult viewRes = result as ViewResult;
+            Models.LogOnModel resModel = viewRes.Model as Models.LogOnModel;
+            Assert.AreSame(resModel, model);
         }
     }
 }
