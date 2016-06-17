@@ -18,3 +18,13 @@ D:\Job\SkillUp\ShopAroundSolution\DataLayer\bin\Debug\EntityFramework.xml
 D:\Job\SkillUp\ShopAroundSolution\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
 D:\Job\SkillUp\ShopAroundSolution\DataLayer\obj\Debug\DataLayer.dll
 D:\Job\SkillUp\ShopAroundSolution\DataLayer\obj\Debug\DataLayer.pdb
+C:\Solutions\DataLayer\bin\Debug\ShopAround.mdf
+C:\Solutions\DataLayer\bin\Debug\ShopAround_log.ldf
+C:\Solutions\DataLayer\bin\Debug\DataLayer.dll.config
+C:\Solutions\DataLayer\bin\Debug\DataLayer.dll
+C:\Solutions\DataLayer\bin\Debug\DataLayer.pdb
+C:\Solutions\DataLayer\bin\Debug\EntityFramework.dll
+C:\Solutions\DataLayer\bin\Debug\EntityFramework.xml
+C:\Solutions\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+C:\Solutions\DataLayer\obj\Debug\DataLayer.dll
+C:\Solutions\DataLayer\obj\Debug\DataLayer.pdb

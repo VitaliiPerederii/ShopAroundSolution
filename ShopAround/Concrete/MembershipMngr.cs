@@ -21,5 +21,10 @@ namespace ShopAround.Concrete
         {
             return Membership.GetUser();
         }
+
+        public void SetAuthCookie(string email, bool rememberMe)
+        {
+            FormsAuthentication.SetAuthCookie(email, rememberMe);
+        }
     }
 }

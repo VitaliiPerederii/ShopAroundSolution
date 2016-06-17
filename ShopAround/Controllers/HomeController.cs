@@ -35,7 +35,7 @@ namespace ShopAround.Controllers
         {
             int itemsOnPage = 3;
             int itemsCount = list.Count;
-            ViewBag.PagesCount = (int)Math.Ceiling(((double)itemsCount / (double)itemsOnPage));
+            ViewBag.PagesCount = (int)Math.Ceiling(itemsCount / (double)itemsOnPage);
 
             int startIndex = page != null ? (page.Value - 1) * itemsOnPage : 0;
             int countOnPage = Math.Min(itemsCount - startIndex, 3);

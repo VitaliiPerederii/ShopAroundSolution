@@ -12,5 +12,6 @@ namespace ShopAround.Abstract
         bool ValidateUser(string Email, string Password);
         MembershipUser CreateUser(string Email, string Password, string Name);
         MembershipUser GetUser();
+        void SetAuthCookie(string email, bool rememberMe);
     }
 }

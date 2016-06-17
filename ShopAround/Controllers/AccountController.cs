@@ -30,7 +30,7 @@ namespace ShopAround.Controllers
             {
                 if (membMngr.ValidateUser(model.Email, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+                    membMngr.SetAuthCookie(model.Email, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
