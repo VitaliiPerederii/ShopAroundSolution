@@ -3,7 +3,7 @@ using ShopAround.Models;
 using ShopAround.Abstract;
 using ShopAround.Concrete;
 using System.Web.Security;
-
+using Ninject;
 
 namespace ShopAround.Controllers
 {
@@ -12,6 +12,9 @@ namespace ShopAround.Controllers
     {
         IProductStorage db;
         IMembershipMngr membMngr;
+
+        [Inject]
+        public IPlatformProvider PlatformProvider { get; set; }
 
         public AccountController(IProductStorage storage, IMembershipMngr membMngr)
         {
@@ -31,7 +34,7 @@ namespace ShopAround.Controllers
                 if (membMngr.ValidateUser(model.Email, model.Password))
                 {
                     membMngr.SetAuthCookie(model.Email, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl))
+                    if (PlatformProvider.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
@@ -68,7 +71,7 @@ namespace ShopAround.Controllers
 
                 if (membershipUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Email, false);
+                    membMngr.SetAuthCookie(model.Email, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ShopAround.Models;
 using ShopAround.Abstract;
-using System.Web.Security;
 
 namespace ShopAround.Controllers
 {
@@ -17,15 +14,14 @@ namespace ShopAround.Controllers
             db = storage;
         }
         
-        public ActionResult Index()
+        public ActionResult Index(Cart cart)
         {
-            return View(GetCart());
+            return View(cart);
         }
 
         [HttpPost]
-        public ActionResult AddItemToCart(int id)
+        public ActionResult AddItemToCart(Cart cart, int id)
         {
-            Cart cart = GetCart();
             UiShopItem item = db.ShopItems.Where(i => i.Id == id).FirstOrDefault();
             if (cart != null && item != null)
                 cart.AddItem(item);
@@ -34,9 +30,8 @@ namespace ShopAround.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteItemFromCart(int id)
+        public ActionResult DeleteItemFromCart(Cart cart, int id)
         {
-            Cart cart = GetCart();
             UiShopItem item = db.ShopItems.Where(i => i.Id == id).FirstOrDefault();
             if (cart != null && item != null)
                 cart.DeleteItem(item);
@@ -44,20 +39,18 @@ namespace ShopAround.Controllers
             return RedirectToAction("Index");
         }
 
-        public string GetCartItemsCount()
+        public string GetCartItemsCount(Cart cart)
         {
             string count = "0";
-            Cart cart = GetCart();
             if (cart != null)
                 count = cart.Items.Count().ToString();
 
             return count;
         }
 
-        public string GetCartItemsPrice()
+        public string GetCartItemsPrice(Cart cart)
         {
             string price = "0";
-            Cart cart = GetCart();
             if (cart != null)
                 price = cart.Total.ToString();
 
@@ -79,11 +72,10 @@ namespace ShopAround.Controllers
         }
 
         [HttpPost]
-        public ActionResult MakeOrder(UiOrder order)
+        public ActionResult MakeOrder(Cart cart, UiOrder order)
         {
             if (ModelState.IsValid)
             {
-                Cart cart = GetCart();
                 order.Cart = cart;
                 order.Date = DateTime.Now;
                 db.CommitOrder(order);
@@ -92,19 +84,7 @@ namespace ShopAround.Controllers
             else
                 return View(order);
 
-
             return RedirectToAction("Index", "Home");
-        }
-        
-        private Cart GetCart()
-        {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-            return cart;
         }
     }
 }

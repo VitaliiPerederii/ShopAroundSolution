@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IMembershipProvider.cs" />
     <Compile Include="Abstract\IProductStorage.cs" />
+    <Compile Include="Abstract\IPlatformProvider.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Concrete\DatabaseProductStorage.cs" />
     <Compile Include="Concrete\MembershipMngr.cs" />
     <Compile Include="Concrete\NHibernateProductStorage.cs" />
+    <Compile Include="Concrete\PlatformProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -163,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfig.cs" />
+    <Compile Include="Infrastructure\CartModelBinder.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />

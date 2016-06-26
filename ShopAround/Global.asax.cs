@@ -10,6 +10,7 @@ using ShopAround.Infrastructure;
 using System.IO;
 using System.Web.Security;
 using ShopAround.Concrete;
+using ShopAround.Models;
 
 namespace ShopAround
 {
@@ -33,6 +34,7 @@ namespace ShopAround
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             AutoMapperConfig.Configure();
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }
