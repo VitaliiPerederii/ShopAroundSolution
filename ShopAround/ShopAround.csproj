@@ -144,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICart.cs" />
     <Compile Include="Abstract\IMembershipProvider.cs" />
     <Compile Include="Abstract\IProductStorage.cs" />
     <Compile Include="Abstract\IPlatformProvider.cs" />

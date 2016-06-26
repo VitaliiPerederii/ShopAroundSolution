@@ -14,13 +14,13 @@ namespace ShopAround.Controllers
             db = storage;
         }
         
-        public ActionResult Index(Cart cart)
+        public ActionResult Index(ICart cart)
         {
             return View(cart);
         }
 
         [HttpPost]
-        public ActionResult AddItemToCart(Cart cart, int id)
+        public ActionResult AddItemToCart(ICart cart, int id)
         {
             UiShopItem item = db.ShopItems.Where(i => i.Id == id).FirstOrDefault();
             if (cart != null && item != null)
@@ -30,7 +30,7 @@ namespace ShopAround.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteItemFromCart(Cart cart, int id)
+        public ActionResult DeleteItemFromCart(ICart cart, int id)
         {
             UiShopItem item = db.ShopItems.Where(i => i.Id == id).FirstOrDefault();
             if (cart != null && item != null)
@@ -39,7 +39,7 @@ namespace ShopAround.Controllers
             return RedirectToAction("Index");
         }
 
-        public string GetCartItemsCount(Cart cart)
+        public string GetCartItemsCount(ICart cart)
         {
             string count = "0";
             if (cart != null)
@@ -48,7 +48,7 @@ namespace ShopAround.Controllers
             return count;
         }
 
-        public string GetCartItemsPrice(Cart cart)
+        public string GetCartItemsPrice(ICart cart)
         {
             string price = "0";
             if (cart != null)
@@ -72,7 +72,7 @@ namespace ShopAround.Controllers
         }
 
         [HttpPost]
-        public ActionResult MakeOrder(Cart cart, UiOrder order)
+        public ActionResult MakeOrder(ICart cart, UiOrder order)
         {
             if (ModelState.IsValid)
             {

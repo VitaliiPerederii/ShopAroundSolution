@@ -1,10 +1,13 @@
 ﻿using ShopAround.Abstract;
 using ShopAround.Controllers;
+using ShopAround.Models;
+using System.Linq;
 
 namespace ShopAround.Tests.Unit.Controllers
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     namespace ShopAround.Controllers.Tests
@@ -13,11 +16,17 @@ namespace ShopAround.Tests.Unit.Controllers
         public class CartControllerTests
         {
             [TestMethod()]
-            public void Login_CredsIncorrect_ReturnsViewWithModel()
+            public void AddItemToCart_ItemExists_CallsAddItemOnce()
             {
-                Mock<IMembershipMngr> mock = new Mock<IMembershipMngr>();
-                mock.Setup(m => m.ValidateUser(It.IsAny<string>(), It.IsAny<string>())).Returns((string one, string two) => false);
-                AccountController controller = new AccountController(null, mock.Object);
+                Mock<IProductStorage> mock = new Mock<IProductStorage>();
+                mock.Setup(m => m.ShopItems).Returns(() =>
+                {
+                    return new List<UiShopItem>()
+                    {
+                        new UiShopItem() {  Id = 1, Name = "Name1", Price = 50.0f }
+                    }.AsQueryable();
+                });
+                CartController controller = new CartController(mock.Object);
 
                 Models.LogOnModel model = new Models.LogOnModel()
                 {

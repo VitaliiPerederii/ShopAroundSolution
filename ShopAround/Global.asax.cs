@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using ShopAround.Infrastructure;
 using System.IO;
-using System.Web.Security;
-using ShopAround.Concrete;
-using ShopAround.Models;
+using ShopAround.Abstract;
 
 namespace ShopAround
 {
@@ -34,7 +29,7 @@ namespace ShopAround
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DependencyResolver.SetResolver(new NinjectDependencyResolver());
             AutoMapperConfig.Configure();
-            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+            ModelBinders.Binders.Add(typeof(ICart), new CartModelBinder());
         }
     }
 }

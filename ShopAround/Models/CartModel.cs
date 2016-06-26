@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using ShopAround.Abstract;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ShopAround.Models
 {
-    public class Cart
+    public class Cart: ICart
     {
         private List<CartItem> items = new List<CartItem>();
 
