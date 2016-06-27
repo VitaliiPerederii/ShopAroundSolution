@@ -66,6 +66,7 @@
     <Compile Include="Concrete\CustomRoleProviderTests.cs" />
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\CartControllerTests.cs" />
+    <Compile Include="Models\CartTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

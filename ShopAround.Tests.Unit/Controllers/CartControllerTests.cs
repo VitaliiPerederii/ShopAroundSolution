@@ -23,23 +23,90 @@ namespace ShopAround.Tests.Unit.Controllers
                 {
                     return new List<UiShopItem>()
                     {
-                        new UiShopItem() {  Id = 1, Name = "Name1", Price = 50.0f }
+                        new UiShopItem() {  Id = 1, Name = "Name1", Price = 50.0f },
+                        new UiShopItem() {  Id = 2, Name = "Name2", Price = 60.0f },
+                        new UiShopItem() {  Id = 3, Name = "Name3", Price = 70.0f },
+                        new UiShopItem() {  Id = 4, Name = "Name4", Price = 80.0f },
                     }.AsQueryable();
                 });
+                
+                Mock<ICart> mockCart = new Mock<ICart>();
                 CartController controller = new CartController(mock.Object);
 
-                Models.LogOnModel model = new Models.LogOnModel()
+                ActionResult result = controller.AddItemToCart(mockCart.Object, 4);
+                mockCart.Verify(m => m.AddItem(It.Is<UiShopItem>(u => helpfunc(u))), Times.Once());
+            }
+
+            bool helpfunc(UiShopItem u)
+            {
+                return u.Id == 4 && u.Name == "Name4" && u.Price == 80.0f;
+            }
+
+            [TestMethod()]
+            public void AddItemToCart_ItemNotExists_CallsAddItemNever()
+            {
+                Mock<IProductStorage> mock = new Mock<IProductStorage>();
+                mock.Setup(m => m.ShopItems).Returns(() =>
                 {
-                    Email = "test",
-                    Password = "test1"
-                };
+                    return new List<UiShopItem>()
+                    {
+                        new UiShopItem() {  Id = 1, Name = "Name1", Price = 50.0f },
+                        new UiShopItem() {  Id = 2, Name = "Name2", Price = 60.0f },
+                        new UiShopItem() {  Id = 3, Name = "Name3", Price = 70.0f },
+                        new UiShopItem() {  Id = 4, Name = "Name4", Price = 80.0f },
+                    }.AsQueryable();
+                });
 
-                ActionResult result = controller.Login(model, null);
-                Assert.IsInstanceOfType(result, typeof(ViewResult));
+                Mock<ICart> mockCart = new Mock<ICart>();
+                CartController controller = new CartController(mock.Object);
 
-                ViewResult viewRes = result as ViewResult;
-                Assert.AreSame(viewRes.Model, model);
-                Assert.IsFalse(viewRes.ViewData.ModelState.IsValid);
+                ActionResult result = controller.AddItemToCart(mockCart.Object, 5);
+                mockCart.Verify(m => m.AddItem(It.IsAny<UiShopItem>()), Times.Never());
+            }
+
+
+            [TestMethod()]
+            public void DeleteItemFromCart_ItemExists_CallsDeleteItemOnce()
+            {
+                Mock<IProductStorage> mock = new Mock<IProductStorage>();
+                mock.Setup(m => m.ShopItems).Returns(() =>
+                {
+                    return new List<UiShopItem>()
+                    {
+                        new UiShopItem() {  Id = 1, Name = "Name1", Price = 50.0f },
+                        new UiShopItem() {  Id = 2, Name = "Name2", Price = 60.0f },
+                        new UiShopItem() {  Id = 3, Name = "Name3", Price = 70.0f },
+                        new UiShopItem() {  Id = 4, Name = "Name4", Price = 80.0f },
+                    }.AsQueryable();
+                });
+
+                Mock<ICart> mockCart = new Mock<ICart>();
+                CartController controller = new CartController(mock.Object);
+
+                ActionResult result = controller.DeleteItemFromCart(mockCart.Object, 4);
+                mockCart.Verify(m => m.DeleteItem(It.Is<UiShopItem>(u => helpfunc(u))), Times.Once());
+            }
+
+            [TestMethod()]
+            public void DeleteItemFromCart_ItemNotExists_CallsDeleteItemNever()
+            {
+                Mock<IProductStorage> mock = new Mock<IProductStorage>();
+                mock.Setup(m => m.ShopItems).Returns(() =>
+                {
+                    return new List<UiShopItem>()
+                    {
+                        new UiShopItem() {  Id = 1, Name = "Name1", Price = 50.0f },
+                        new UiShopItem() {  Id = 2, Name = "Name2", Price = 60.0f },
+                        new UiShopItem() {  Id = 3, Name = "Name3", Price = 70.0f },
+                        new UiShopItem() {  Id = 4, Name = "Name4", Price = 80.0f },
+                    }.AsQueryable();
+                });
+
+                Mock<ICart> mockCart = new Mock<ICart>();
+                CartController controller = new CartController(mock.Object);
+
+                ActionResult result = controller.DeleteItemFromCart(mockCart.Object, 5);
+                mockCart.Verify(m => m.DeleteItem(It.IsAny<UiShopItem>()), Times.Never());
             }
         }
     }
